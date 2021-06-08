@@ -14,18 +14,6 @@ searchBar.addEventListener('keyup', (e) => {
     displayCharacters(filteredCharacters);
 });
 
-const loadCharacters = async () => {
-    try {
-        const res = await fetch('https://hp-api.herokuapp.com/api/characters');
-        console.log(hpCharacters);
-        hpCharacters = await res.json();
-        console.log(hpCharacters);
-        displayCharacters(hpCharacters);
-    } catch (err) {
-        console.error(err);
-    }
-};
-
 const loadAssignmnets = async () => {
     try {
         const res2 = await fetch('https://dmwxjh34he.execute-api.us-east-1.amazonaws.com/dev/EZAFunc/assignments/');
@@ -42,15 +30,14 @@ const displayCharacters = (characters) => {
     const htmlString = characters
         .map((character) => {
             return `
-            <li class="character">
+            <a href = "details.html"><li class="character">
                 <h2>${character.name}</h2>
                 <p>Hours to Complete: ${character.average_hours_to_complete}</p>
-            </li>
+            </li></a>
         `;
         })
         .join('');
     charactersList.innerHTML = htmlString;
 };
 
-//loadCharacters();
 loadAssignmnets();
