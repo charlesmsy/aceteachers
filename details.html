@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Ace Teacher's Academy</title>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Serverless web application example">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <link rel="stylesheet" href="css/app.css" />
+    
+    <style>
+    input, label {
+      display: block;
+      margin: auto;
+      width: 300px;
+      height: 50px;
+      padding: 5px;
+      margin-bottom: 10px;
+      background-color: white; 
+    }
+        
+    input[type=button] {
+      display: block;
+      background-color: lightgrey; 
+    }
+
+    input[type=button]:hover {
+      background-color: grey; 
+    }
+    </style>
+    
+    <script>
+        
+    async function getOne(id) {
+    await fetch('https://dmwxjh34he.execute-api.us-east-1.amazonaws.com/dev/EZAFunc/assignments/' + id + '/', {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+
+    })
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            document.getElementById('dassignment_id').innerHTML = 'Assignment id: ' + data.assignment_id+"<br>";
+            document.getElementById('dname').innerHTML = ' Name: ' + data.name+"<br>";
+            document.getElementById('ddescription').innerHTML = ' Description: '+ data.description+"<br>";
+            document.getElementById('dhours').innerHTML = ' Average hours to complete: ' + data.average_hours_to_complete+"<br>";
+            document.getElementById('dworksheet').innerHTML = ' Workseet: ' + data.worksheet+"<br>";
+            document.getElementById('danswersheet').innerHTML = ' answersheet: ' + data.answersheet+"<br>";
+            document.getElementById('duser_id').innerHTML = ' User_ID: ' + data.user_id+"<br>";
+        });
+        }
+    </script>
+
+</head>
+    
+<body onload="getOne(1)">
+
+    <!--header class="site-header">
+        <h1 class="title">Ace Teacher's Academy</h1>
+        <nav class="site-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ride.html">Search Page</a></li>
+            <li><a href="createassignment.html">Create a Assignment</a></li>
+            <li><a id="signOut" href="signedout.html">Sign Out</a></li>
+          </ul>
+        </nav>
+        <button type="button" class="btn-menu"><span>Menu</span></button>
+    </header--> 
+
+        <div class="container">
+            <h1>&#x2728;This is the detail page &#x2728;</h1>
+        </div>
+        
+        <section class="form-wrap">
+        <h1>Assignment Detail's Page</h1>
+            <form id="displayDatails">
+                <label type="text" id="dassignment_id" placeholder="Assignment ID"></label>
+              <label type="text" id="dname" placeholder="Name"></label>
+              <label type="text" id="ddescription" placeholder="Description"></label>
+              <label type="text" id="dhours" placeholder="Average Hours to Complete" pattern=".*" required></label>
+              <label type="text" id="dworksheet" placeholder="Worksheet" pattern=".*" required></label>
+              <label type="text" id="danswersheet" placeholder="Answer Sheet" pattern=".*" required></label>
+              <label type="text" id="duser_id" placeholder="User ID" pattern=".*" required></label>
+
+              <!--input type="button" onclick="window.location.href='assignmentUpdate.html'" value="Edit"--->
+              <!--input type="button" onclick="toDelete()" value="Delete"-->
+              <input type="button" onclick="window.location.href='ride.html';" value="Back to List" />
+            </form>
+    </section>
+    
+    
+    <script src="js/app.js"></script>
+
+    <script src="js/vendor/jquery-3.1.0.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/aws-cognito-sdk.min.js"></script>
+    <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+    <script src="https://js.arcgis.com/4.3/"></script>
+    <script src="js/config.js"></script>
+    <script src="js/cognito-auth.js"></script>
+    <script src="js/esri-map.js"></script>
+</body>
+
+</html>
